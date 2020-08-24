@@ -2,7 +2,7 @@ const knex = require("knex");
 const app = require("../src/app");
 const helpers = require("./test-helpers");
 
-describe("Articles Endpoints", function () {
+describe("Things Endpoints", function () {
   let db;
 
   const { testUsers, testThings, testReviews } = helpers.makeThingsFixtures();
@@ -53,7 +53,7 @@ describe("Articles Endpoints", function () {
         const userNoCreds = { user_name: "", password: "" };
         return supertest(app)
           .get(endpoint.path)
-          .set('Authorization', helpers.makeAuthHeader(userNoCreds))
+          .set("Authorization", helpers.makeAuthHeader(userNoCreds))
           .expect(401, { error: `Unauthorized request` });
       });
       it(`responds 401 'Unauthorized request' when invalid user`, () => {
@@ -120,7 +120,7 @@ describe("Articles Endpoints", function () {
 
   describe(`GET /api/things/:things_id`, () => {
     context(`Given no things`, () => {
-      beforeEach(() => db.into("thingful_users").insert(testUsers));
+      beforeEach(() => helpers.seedUsers(db, testUsers));
       it(`responds with 404`, () => {
         const thingId = 123456;
         return supertest(app)
@@ -175,7 +175,9 @@ describe("Articles Endpoints", function () {
 
   describe(`GET /api/things/:thing_id/reviews`, () => {
     context(`Given no things`, () => {
-      beforeEach(() => db.into("thingful_users").insert(testUsers));
+      beforeEach(() => 
+      helpers.seedUsers(db, testUsers)
+      );
       it(`responds with 404`, () => {
         const thingId = 123456;
         return supertest(app)

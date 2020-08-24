@@ -12,6 +12,10 @@
 - Replace values in `.env` with your custom values.
 - Bootstrap development database: `npm run migrate`
 - Bootstrap test database: `npm run migrate:test`
+Migrate the dev database `npm run migrate`
+
+Migrate the test database `npm run migrate:test`
+
 
 ### Configuring Postgres
 
