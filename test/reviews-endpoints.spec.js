@@ -43,7 +43,7 @@ describe("Reviews Endpoints", function () {
       const newReview = {
         text: "Test new review",
         rating: 3,
-        thing_id: testThing.id,
+        thing_id: testThing.id
       };
       return supertest(app)
         .post("/api/reviews")
@@ -78,7 +78,7 @@ describe("Reviews Endpoints", function () {
             })
         );
     });
-    const requiredFields = ["text", "thing_id"];
+    const requiredFields = ["text", "thing_id", "rating"];
 
     requiredFields.forEach((field) => {
       const testThing = testThings[0];
